@@ -39,17 +39,30 @@ int main(int argc, char **argv)
 	pins[6] = 22;
 	pins[7] = 23;
 
-	int i, j, k;
+	int k;
 	for(k = 0; k < 8; k++){
 		pinMode(pins[k], OUTPUT);
 	}
+
+	for(int i = 0; i < 8; i++){
+		digitalWrite(pins[i], 0);	
+	}
+
+	int inputBits[8];
 	
-	for(i = 0; i < 10; i++){
-		for(j = 0; j < 8; j++){
-			digitalWrite(pins[j], 1) ; delay (100);
-			digitalWrite(pins[j], 0) ; delay (10);
-		}
-	}	
+	printf("\nInput 8 bits one at a time and hit enter\nLeast significant bit first\n");
+
+	for(int i = 0; i < 8; i++){
+		scanf("%d", &inputBits[i]);
+		digitalWrite(pins[i], inputBits[i]);	
+	}
+
+	printf("You have entered: ");
+	for (int i = 7; i >= 0; i--){
+		printf("%d", inputBits[i]);	
+	}
+	printf("\n");
+	
 	return 0;
 }
 
